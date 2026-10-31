@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Spaced RGB
+Comment=Control RGB lighting and the Lian Li cooler display
+Exec=spaced-rgb
+Icon=io.github.crhy.SpacedRGB
+Terminal=false
+Categories=Settings;HardwareSettings;
+StartupNotify=true

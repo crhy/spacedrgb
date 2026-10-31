@@ -1,0 +1,156 @@
+{
+  "app-id": "io.github.crhy.SpacedRGB",
+  "runtime": "org.gnome.Platform",
+  "runtime-version": "50",
+  "sdk": "org.gnome.Sdk",
+  "command": "spaced-rgb",
+  "separate-locales": false,
+  "finish-args": [
+    "--share=ipc",
+    "--socket=wayland",
+    "--socket=fallback-x11",
+    "--share=network",
+    "--device=all",
+    "--filesystem=home:ro",
+    "--talk-name=org.freedesktop.Flatpak"
+  ],
+  "cleanup": [
+    "/include",
+    "/lib/*.a",
+    "/lib/pkgconfig",
+    "/share/man"
+  ],
+  "modules": [
+    {
+      "name": "x264",
+      "buildsystem": "simple",
+      "build-commands": [
+        "./configure --prefix=/app --enable-static --enable-pic --disable-cli --disable-opencl",
+        "make -j$FLATPAK_BUILDER_N_JOBS",
+        "make install"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://code.videolan.org/videolan/x264/-/archive/b35605ace3ddf7c1a5d67a2eb553f034aef41d55/x264-b35605ace3ddf7c1a5d67a2eb553f034aef41d55.tar.gz",
+          "sha256": "cd71a7515b0e9a012e1ac9b1f8415bebcaf6fc97d4db32286642ac4c0fbe24f9"
+        }
+      ]
+    },
+    {
+      "name": "ffmpeg-lcd",
+      "buildsystem": "simple",
+      "build-commands": [
+        "./configure --prefix=/app --disable-everything --disable-doc --disable-debug --disable-shared --enable-static --enable-gpl --enable-libx264 --enable-encoder=libx264 --enable-decoder=rawvideo --enable-demuxer=rawvideo --enable-muxer=h264 --enable-protocol=pipe --enable-filter=scale,format,null --enable-swscale --enable-avfilter --disable-autodetect",
+        "make -j$FLATPAK_BUILDER_N_JOBS",
+        "make install"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://ffmpeg.org/releases/ffmpeg-7.1.4.tar.xz",
+          "sha256": "71f4aac3573ed9060489cb62526a6c7dda815ae10993789611acd7be9fa9fbf4"
+        }
+      ]
+    },
+    {
+      "name": "python-dependencies",
+      "buildsystem": "simple",
+      "build-commands": [
+        "pip3 install --no-index --no-deps --no-build-isolation --target=/app/share/spaced-rgb/.vendor *.whl *.tar.gz"
+      ],
+      "sources": [
+        {
+          "type": "file",
+          "url": "https://files.pythonhosted.org/packages/12/0a/703b4318b508b123303e6ee4d8998e0efa778524fd8fd497fb35692dd54f/openrgb_python-0.3.8-py3-none-any.whl",
+          "sha256": "6e61a92a2119c7cdab4e615302a0707cd8d8f12e3f001067a6b5fae0c5e7e7b2"
+        },
+        {
+          "type": "file",
+          "url": "https://files.pythonhosted.org/packages/0b/85/ccdaf3518149a625f7b03dee35672c13f07ec8ff07cfac952ee770f6e8a5/liquidctl-1.16.0-py3-none-any.whl",
+          "sha256": "9bc686c06ef8029cb7e15d2857a509704907a2722f2d18edf1d046aa4b1ba5a9"
+        },
+        {
+          "type": "file",
+          "url": "https://files.pythonhosted.org/packages/d4/19/0b6647bf5e331521e55d2b63bfbdc210bd9cd605189273f03614a05f702d/colorlog-6.12.0-py3-none-any.whl",
+          "sha256": "30d392604e9110045a2c2aeefc27d7a017abbab63f3a8aee594eac0801df784e"
+        },
+        {
+          "type": "file",
+          "url": "https://files.pythonhosted.org/packages/6b/b0/e595ce2a2527e169c3bcd6c33d2473c1918e0b7f6826a043ca1245dd4e5b/crcmod-1.7.tar.gz",
+          "sha256": "dc7051a0db5f2bd48665a990d3ec1cc305a466a77358ca4492826f41f283601e"
+        },
+        {
+          "type": "file",
+          "url": "https://files.pythonhosted.org/packages/a2/55/8f8cab2afd404cf578136ef2cc5dfb50baa1761b68c9da1fb1e4eed343c9/docopt-0.6.2.tar.gz",
+          "sha256": "49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491"
+        },
+        {
+          "type": "file",
+          "url": "https://files.pythonhosted.org/packages/f1/b0/f144cee5ce9e45518d234fd07c7a4f9a66de3a78ed42bf9f3f4083165e10/hidapi-0.15.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+          "sha256": "208c7fc89f78c3448d55957c3e12893778aa91218ed7dc22697e554f091fe4fe"
+        },
+        {
+          "type": "file",
+          "url": "https://files.pythonhosted.org/packages/28/b8/27e6312e86408a44fe16bd28ee12dd98608b39f7e7e57884a24e8f29b573/pyusb-1.3.1-py3-none-any.whl",
+          "sha256": "bf9b754557af4717fe80c2b07cc2b923a9151f5c08d17bdb5345dac09d6a0430"
+        },
+        {
+          "type": "file",
+          "url": "https://files.pythonhosted.org/packages/ef/fe/f5cdaa2d1c4086e757430f368c271a58ee29cfe7378e7ae7b9d964015c25/pillow-13.0.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+          "sha256": "5f56499c1a74d2b862beb0c33b8016f99d095858455df9d21583bbbc1c15b582"
+        },
+        {
+          "type": "file",
+          "url": "https://files.pythonhosted.org/packages/85/9f/2235ba9001e3c29fc342eeb222104420bcb7bac51555f0c034376a744075/smbus2-0.5.0-py2.py3-none-any.whl",
+          "sha256": "1a15c3b9fa69357beb038cc0b5d37939702f8bfde1ddc89ca9f17d8461dbe949"
+        }
+      ]
+    },
+    {
+      "name": "openrgb",
+      "buildsystem": "simple",
+      "build-commands": [
+        "chmod +x OpenRGB.AppImage",
+        "./OpenRGB.AppImage --appimage-extract >/dev/null",
+        "mkdir -p /app/share/spaced-rgb/.backend",
+        "mv squashfs-root /app/share/spaced-rgb/.backend/"
+      ],
+      "sources": [
+        {
+          "type": "file",
+          "url": "https://codeberg.org/OpenRGB/OpenRGB/releases/download/release_1.1/OpenRGB_1.1_x86_64_8e16de2.AppImage",
+          "dest-filename": "OpenRGB.AppImage",
+          "sha256": "d556c2273b0ef863dbee7ffdb438304b382add5d685c93c60758b42de3b0268d"
+        }
+      ]
+    },
+    {
+      "name": "spaced-rgb",
+      "buildsystem": "simple",
+      "build-commands": [
+        "cp -r spaced_rgb scripts docs run.py LICENSE THIRD_PARTY.md README.md /app/share/spaced-rgb/",
+        "install -Dm755 flatpak/spaced-rgb /app/bin/spaced-rgb",
+        "install -Dm644 data/io.github.crhy.SpacedRGB.desktop /app/share/applications/io.github.crhy.SpacedRGB.desktop",
+        "install -Dm644 data/io.github.crhy.SpacedRGB.metainfo.xml /app/share/metainfo/io.github.crhy.SpacedRGB.metainfo.xml",
+        "install -Dm644 data/io.github.crhy.SpacedRGB.svg /app/share/icons/hicolor/scalable/apps/io.github.crhy.SpacedRGB.svg",
+        "install -Dm644 data/io.github.crhy.SpacedRGB.png /app/share/icons/hicolor/512x512/apps/io.github.crhy.SpacedRGB.png"
+      ],
+      "sources": [
+        {
+          "type": "dir",
+          "path": "..",
+          "skip": [
+            ".git",
+            ".vendor",
+            ".backend",
+            ".flatpak-builder",
+            "build-dir",
+            "repo",
+            "dist"
+          ]
+        }
+      ]
+    }
+  ]
+}

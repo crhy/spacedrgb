@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.crhy.SpacedRGB</id>
+  <name>Spaced RGB</name>
+  <summary>Control RGB lighting and the Lian Li cooler display</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <description>
+    <p>Set colors, brightness and lighting effects across supported RAM, graphics cards and coolers. Save presets and select all devices together.</p>
+    <p>Display images or a large CPU temperature in Fahrenheit on the Lian Li Galahad II LCD. Hardware Enable opens authentication and refreshes device access without restarting the app.</p>
+    <p>Uses OpenRGB and liquidctl. Device support depends on their drivers; the Galahad II LCD integration targets USB device 0416:7395.</p>
+  </description>
+  <launchable type="desktop-id">io.github.crhy.SpacedRGB.desktop</launchable>
+  <url type="homepage">https://github.com/crhy/spacedrgb</url>
+  <url type="bugtracker">https://github.com/crhy/spacedrgb/issues</url>
+  <developer id="io.github.crhy"><name>Spaced Linux</name></developer>
+  <content_rating type="oars-1.1"/>
+  <releases><release version="0.1.0" date="2026-10-30"><description><p>Initial release with RGB presets, device selection, Hardware Enable and Galahad II LCD temperature and image display.</p></description></release></releases>
+</component>

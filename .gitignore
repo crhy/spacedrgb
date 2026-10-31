@@ -1,0 +1,9 @@
+.vendor/
+.backend/
+__pycache__/
+*.pyc
+.flatpak-builder/
+build-dir/
+repo/
+dist/
+*.flatpak
